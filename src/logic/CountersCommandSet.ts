@@ -1,3 +1,5 @@
+let _ = require('lodash');
+
 import { CommandSet } from 'pip-services-commons-node';
 import { ICommand } from 'pip-services-commons-node';
 import { Command } from 'pip-services-commons-node';
@@ -5,8 +7,15 @@ import { Schema } from 'pip-services-commons-node';
 import { Parameters } from 'pip-services-commons-node';
 import { FilterParams } from 'pip-services-commons-node';
 import { PagingParams } from 'pip-services-commons-node';
+import { ObjectSchema } from 'pip-services-commons-node';
+import { ArraySchema } from 'pip-services-commons-node';
+import { TypeCode } from 'pip-services-commons-node';
+import { FilterParamsSchema } from 'pip-services-commons-node';
+import { PagingParamsSchema } from 'pip-services-commons-node';
+import { DateTimeConverter } from 'pip-services-commons-node';
 
 import { CounterV1 } from '../data/version1/CounterV1';
+import { CounterV1Schema } from '../data/version1/CounterV1Schema';
 import { ICountersBusinessLogic } from './ICountersBusinessLogic';
 
 export class CountersCommandSet extends CommandSet {
@@ -26,7 +35,9 @@ export class CountersCommandSet extends CommandSet {
 	private makeReadCountersCommand(): ICommand {
 		return new Command(
 			"read_counters",
-			null,
+			new ObjectSchema(true)
+				.withOptionalProperty('fitler', new FilterParamsSchema())
+				.withOptionalProperty('paging', new PagingParamsSchema()),
 			(correlationId: string, args: Parameters, callback: (err: any, result: any) => void) => {
 				let filter = FilterParams.fromValue(args.get("filter"));
 				let paging = PagingParams.fromValue(args.get("paging"));
@@ -38,9 +49,11 @@ export class CountersCommandSet extends CommandSet {
 	private makeWriteCounterCommand(): ICommand {
 		return new Command(
 			"write_counter",
-			null,
+			new ObjectSchema(true)
+				.withRequiredProperty('counter', new CounterV1Schema()),
 			(correlationId: string, args: Parameters, callback: (err: any, result: any) => void) => {
 				let counter = args.get("counter");
+				counter.time = DateTimeConverter.toNullableDateTime(counter.time);
 				this._logic.writeCounter(correlationId, counter, callback);
 			}
 		);
@@ -49,9 +62,13 @@ export class CountersCommandSet extends CommandSet {
 	private makeWriteCountersCommand(): ICommand {
 		return new Command(
 			"write_counters",
-			null,
+			new ObjectSchema(true)
+				.withRequiredProperty('counters', new ArraySchema(new CounterV1Schema())),
 			(correlationId: string, args: Parameters, callback: (err: any) => void) => {
 				let counters = args.get("counters");
+				_.each(counters, (c) => {
+					c.time = DateTimeConverter.toNullableDateTime(c.time);
+				})
 				this._logic.writeCounters(correlationId, counters, callback);
 			}
 		);

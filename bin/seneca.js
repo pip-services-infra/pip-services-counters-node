@@ -1,1 +1,1 @@
-module.exports = require('../obj/src/container/EventLogSenecaPlugin');
+module.exports = require('../obj/src/container/CountersSenecaPlugin');

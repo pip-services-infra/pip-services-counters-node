@@ -1,7 +1,7 @@
-let EventLogProcess = require('../obj/src/container/EventLogProcess').EventLogProcess;
+let CountersProcess = require('../obj/src/container/CountersProcess').CountersProcess;
 
 try {
-    new EventLogProcess().runWithArguments(process.argv);
+    new CountersProcess().run(process.argv);
 } catch (ex) {
     console.error(ex);
 }
