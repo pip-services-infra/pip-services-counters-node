@@ -23,6 +23,50 @@ This microservice has no dependencies on other microservices.
   - [HTTP Version 1](doc/HttpProtocolV1.md)
   - [Seneca Version 1](doc/SenecaProtocolV1.md)
 
+## Contract
+
+Logical contract of the microservice is presented below. For physical implementation (HTTP/REST, Thrift, Seneca, Lambda, etc.),
+please, refer to documentation of the specific protocol.
+
+```typescript
+enum CounterType {
+    Interval = 0,
+    LastValue = 1,
+    Statistics = 2,
+    Timestamp = 3,
+    Increment = 4
+}
+
+class CounterV1 {
+    public constructor(name: string, type: CounterType) {
+        this.name = name;
+        this.type = type;
+    }
+
+    public name: string;
+    public type: CounterType;
+    public last: number;
+    public count: number;
+    public min: number;
+    public max: number;
+    public average: number;
+    public time: Date;
+}
+
+interface ICountersV1 {
+    readCounters(correlationId: string, filter: FilterParams, paging: PagingParams,
+        callback: (err: any, page: DataPage<CounterV1>) => void): void;
+
+    writeCounter(correlationId: string, counter: CounterV1,
+        callback?: (err: any, counter: CounterV1) => void): void;
+    
+    writeCounters(correlationId: string, counters: CounterV1[],
+        callback?: (err: any) => void): void;
+
+    clear(correlationId: string, callback?: (err: any) => void): void;
+}
+```
+
 ## Download
 
 Right now the only way to get the microservice is to check it out directly from github repository
