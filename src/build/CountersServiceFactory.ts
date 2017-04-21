@@ -6,7 +6,7 @@ import { CountersController } from '../logic/CountersController';
 import { CountersHttpServiceV1 } from '../services/version1/CountersHttpServiceV1';
 import { CountersSenecaServiceV1 } from '../services/version1/CountersSenecaServiceV1'; 
 
-export class CountersFactory extends Factory {
+export class CountersServiceFactory extends Factory {
 	public static Descriptor = new Descriptor("pip-services-counters", "factory", "default", "default", "1.0");
 	public static MemoryPersistenceDescriptor = new Descriptor("pip-services-counters", "persistence", "memory", "*", "1.0");
 	public static ControllerDescriptor = new Descriptor("pip-services-counters", "controller", "default", "*", "1.0");
@@ -15,10 +15,10 @@ export class CountersFactory extends Factory {
 	
 	constructor() {
 		super();
-		this.registerAsType(CountersFactory.MemoryPersistenceDescriptor, CountersMemoryPersistence);
-		this.registerAsType(CountersFactory.ControllerDescriptor, CountersController);
-		this.registerAsType(CountersFactory.SenecaServiceDescriptor, CountersSenecaServiceV1);
-		this.registerAsType(CountersFactory.HttpServiceDescriptor, CountersHttpServiceV1);
+		this.registerAsType(CountersServiceFactory.MemoryPersistenceDescriptor, CountersMemoryPersistence);
+		this.registerAsType(CountersServiceFactory.ControllerDescriptor, CountersController);
+		this.registerAsType(CountersServiceFactory.SenecaServiceDescriptor, CountersSenecaServiceV1);
+		this.registerAsType(CountersServiceFactory.HttpServiceDescriptor, CountersHttpServiceV1);
 	}
 	
 }
