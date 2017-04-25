@@ -5,7 +5,7 @@ import { ICleanable } from 'pip-services-commons-node';
 
 import { CounterV1 } from '../data/version1/CounterV1';
 
-export interface ICountersBusinessLogic extends ICleanable {
+export interface ICountersController extends ICleanable {
     readCounters(correlationId: string, filter: FilterParams, paging: PagingParams,
         callback: (err: any, page: DataPage<CounterV1>) => void): void;
 

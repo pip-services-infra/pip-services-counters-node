@@ -16,12 +16,12 @@ import { DateTimeConverter } from 'pip-services-commons-node';
 
 import { CounterV1 } from '../data/version1/CounterV1';
 import { CounterV1Schema } from '../data/version1/CounterV1Schema';
-import { ICountersBusinessLogic } from './ICountersBusinessLogic';
+import { ICountersController } from './ICountersController';
 
 export class CountersCommandSet extends CommandSet {
-	private _logic: ICountersBusinessLogic;
+	private _logic: ICountersController;
 
-	constructor(logic: ICountersBusinessLogic) {
+	constructor(logic: ICountersController) {
 		super();
 
 		this._logic = logic;

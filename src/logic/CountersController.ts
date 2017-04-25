@@ -14,11 +14,11 @@ import { ICommandable } from 'pip-services-commons-node';
 
 import { CounterV1 } from '../data/version1/CounterV1';
 import { ICountersPersistence } from '../persistence/ICountersPersistence';
-import { ICountersBusinessLogic } from './ICountersBusinessLogic';
+import { ICountersController } from './ICountersController';
 import { CountersCommandSet } from './CountersCommandSet';
 
 export class CountersController 
-    implements ICountersBusinessLogic, ICommandable, IConfigurable, IReferenceable {
+    implements ICountersController, ICommandable, IConfigurable, IReferenceable {
     
     private _dependencyResolver: DependencyResolver;
 	private _readPersistence: ICountersPersistence;

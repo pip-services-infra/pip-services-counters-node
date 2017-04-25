@@ -8,8 +8,8 @@ import { DataPage } from 'pip-services-commons-node';
 import { CommandSet } from 'pip-services-commons-node';
 import { ICommandable } from 'pip-services-commons-node';
 import { CounterV1 } from '../data/version1/CounterV1';
-import { ICountersBusinessLogic } from './ICountersBusinessLogic';
-export declare class CountersController implements ICountersBusinessLogic, ICommandable, IConfigurable, IReferenceable {
+import { ICountersController } from './ICountersController';
+export declare class CountersController implements ICountersController, ICommandable, IConfigurable, IReferenceable {
     private _dependencyResolver;
     private _readPersistence;
     private _writePersistence;

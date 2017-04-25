@@ -1,2 +1,2 @@
-export { ICountersBusinessLogic } from './ICountersBusinessLogic';
+export { ICountersController } from './ICountersController';
 export { CountersController } from './CountersController';

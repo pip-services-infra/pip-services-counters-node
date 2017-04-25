@@ -1,8 +1,8 @@
 import { CommandSet } from 'pip-services-commons-node';
-import { ICountersBusinessLogic } from './ICountersBusinessLogic';
+import { ICountersController } from './ICountersController';
 export declare class CountersCommandSet extends CommandSet {
     private _logic;
-    constructor(logic: ICountersBusinessLogic);
+    constructor(logic: ICountersController);
     private makeReadCountersCommand();
     private makeWriteCounterCommand();
     private makeWriteCountersCommand();
