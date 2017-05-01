@@ -49,10 +49,14 @@ export class CountersController
 
     public writeCounter(correlationId: string, counter: CounterV1,
         callback?: (err: any, counter: CounterV1) => void): void {
+        let lastCounter: CounterV1 = counter;
         async.each(this._writePersistence, (p, callback) => {
-            p.create(correlationId, counter, callback);
+            p.create(correlationId, counter, (err, data) => {
+                lastCounter = data || lastCounter;
+                callback(err);
+            });
         }, (err) => {
-            if (callback) callback(err, counter);
+            if (callback) callback(err, lastCounter);
         });
     }
     

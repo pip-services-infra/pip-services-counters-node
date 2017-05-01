@@ -24,11 +24,15 @@ class CountersController {
         this._writePersistence = this._dependencyResolver.getOptional('write_persistence');
     }
     writeCounter(correlationId, counter, callback) {
+        let lastCounter = counter;
         async.each(this._writePersistence, (p, callback) => {
-            p.create(correlationId, counter, callback);
+            p.create(correlationId, counter, (err, data) => {
+                lastCounter = data || lastCounter;
+                callback(err);
+            });
         }, (err) => {
             if (callback)
-                callback(err, counter);
+                callback(err, lastCounter);
         });
     }
     writeCounters(correlationId, counters, callback) {
