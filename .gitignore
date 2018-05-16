@@ -1,8 +1,7 @@
-/dist
 /node_modules
 /npm-debug.log
 /.idea
-/config/config.yaml
-/data/counters.test.json
-/data/counters.json
+/data/facets.test.json
+/data/facets.json
 /obj/test
+/docker/id_rsa*

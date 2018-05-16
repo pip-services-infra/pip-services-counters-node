@@ -1,0 +1,90 @@
+---
+# Container descriptor
+- descriptor: "pip-services:context-info:default:default:1.0"
+  name: "pip-services-counters"
+  description: "Counters microservice for pip-services"
+
+# Console logger
+- descriptor: "pip-services:logger:console:default:1.0"
+  level: "trace"
+
+{{#if ELASTICSEARCH_LOGGING_ENABLED}}
+# ElasticSearch logger
+- descriptor: "pip-services:logger:elasticsearch:default:1.0"
+  level: "info"
+  connection:
+    protocol: http
+    host: {{ELASTICSEARCH_LOGGING_SERVICE_HOST}}
+    port: {{ELASTICSEARCH_LOGGING_SERVICE_PORT}}
+{{/if}}
+
+# Performance counters that posts values to log
+- descriptor: "pip-services:counters:log:default:1.0"
+  level: "trace"
+
+# Prometheus performance counters
+{{#if PUSHGATEWAY_METRICS_ENABLED}}
+- descriptor: "pip-services:counters:prometheus:default:1.0"
+  level: "trace"
+  interval: "30000"  
+  connection:
+    protocol: http
+    host: {{PUSHGATEWAY_METRICS_SERVICE_HOST}}
+    port: {{PUSHGATEWAY_METRICS_SERVICE_PORT}}
+{{/if}}
+
+{{#if MEMORY_ENABLED}}
+# In-memory persistence. Use only for testing!
+- descriptor: "pip-services-counters:persistence:memory:default:1.0"
+{{/if}}
+
+{{#if FILE_ENABLED}}
+# File persistence. Use it for testing of for simple standalone deployments
+- descriptor: "pip-services-counters:persistence:file:default:1.0"
+  path: {{FILE_PATH}}{{#unless FILE_PATH}}"../data/counters.json"{{/unless}}
+{{/if}}
+
+{{#if MONGO_ENABLED}}
+# MongoDB Persistence
+- descriptor: "pip-services-counters:persistence:mongodb:default:1.0"
+  collection: {{MONGO_COLLECTION}}{{#unless MONGO_COLLECTION}}counters{{/unless}}
+  connection:
+    uri: {{{MONGO_SERVICE_URI}}}
+    host: {{{MONGO_SERVICE_HOST}}}{{#unless MONGO_SERVICE_HOST}}localhost{{/unless}}
+    port: {{MONGO_SERVICE_PORT}}{{#unless MONGO_SERVICE_PORT}}27017{{/unless}}
+    database: {{MONGO_DB}}{{#unless MONGO_DB}}app{{/unless}}
+  credential:
+    username: {{MONGO_USER}}
+    password: {{MONGO_PASS}}
+{{/if}}
+
+{{#unless MEMORY_ENABLED}}{{#unless FILE_ENABLED}}{{#unless MONGO_ENABLED}}
+# Default in-memory persistence
+- descriptor: "pip-services-counters:persistence:memory:default:1.0"
+{{/unless}}{{/unless}}{{/unless}}
+
+# Default controller
+- descriptor: "pip-services-counters:controller:default:default:1.0"
+
+# Common HTTP endpoint
+- descriptor: "pip-services:endpoint:http:default:1.0"
+  connection:
+    protocol: "http"
+    host: "0.0.0.0"
+    port: 8080
+
+# HTTP endpoint version 1.0
+- descriptor: "pip-services-counters:service:http:default:1.0"
+
+# Heartbeat service
+- descriptor: "pip-services:heartbeat-service:http:default:1.0"
+
+# Status service
+- descriptor: "pip-services:status-service:http:default:1.0"
+
+# Prometheus metrics service
+- descriptor: "pip-services:metrics-service:prometheus:default:1.0"
+  connection:
+    protocol: "http"
+    host: "0.0.0.0"
+    port: 8082
