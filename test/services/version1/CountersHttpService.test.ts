@@ -61,7 +61,7 @@ suite('CountersHttpServiceV1', ()=> {
                 counter.min = 1;
                 counter.average = 5;
 
-                rest.post('/counters/write_counter',
+                rest.post('/v1/counters/write_counter',
                     {
                         counter: counter
                     },
@@ -82,7 +82,7 @@ suite('CountersHttpServiceV1', ()=> {
                 let counter2 = new CounterV1("counter2", CounterType.Statistics);
                 counter2.count = 1;
 
-                rest.post('/counters/write_counters',
+                rest.post('/v1/counters/write_counters',
                     {
                         counters: [counter1, counter2]
                     },
@@ -93,7 +93,7 @@ suite('CountersHttpServiceV1', ()=> {
                 );
             },
             (callback) => {
-                rest.post('/counters/read_counters',
+                rest.post('/v1/counters/read_counters',
                     {
                         filter: FilterParams.fromTuples("name", "counter1")
                     }, 
