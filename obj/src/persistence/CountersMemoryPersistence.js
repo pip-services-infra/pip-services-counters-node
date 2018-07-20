@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+let async = require('async');
 const pip_services_commons_node_1 = require("pip-services-commons-node");
 const pip_services_commons_node_2 = require("pip-services-commons-node");
 const pip_services_commons_node_3 = require("pip-services-commons-node");
@@ -23,6 +24,8 @@ class CountersMemoryPersistence {
     counterContains(counter, search) {
         search = search.toLowerCase();
         if (this.matchString(counter.name, search))
+            return true;
+        if (this.matchString(counter.source, search))
             return true;
         return false;
     }
@@ -97,7 +100,7 @@ class CountersMemoryPersistence {
             return counter;
         }
     }
-    create(correlationId, counter, callback) {
+    addOne(correlationId, counter, callback) {
         if (counter == null) {
             if (callback)
                 callback(null, null);
@@ -109,6 +112,11 @@ class CountersMemoryPersistence {
         this._counters[counter.name] = counter;
         if (callback)
             callback(null, counter);
+    }
+    addBatch(correlationId, counters, callback) {
+        async.each(counters, (c, callback) => {
+            this.addOne(correlationId, c, callback);
+        }, callback);
     }
     clear(correlationId, callback) {
         this._counters = {};

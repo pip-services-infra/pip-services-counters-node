@@ -6,7 +6,9 @@ export class CounterV1 {
         this.type = type;
     }
 
+    public id: string
     public name: string;
+    public source: string;
     public type: CounterType;
     public last: number;
     public count: number;

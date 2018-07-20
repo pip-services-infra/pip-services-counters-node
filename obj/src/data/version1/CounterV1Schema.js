@@ -5,7 +5,9 @@ const pip_services_commons_node_2 = require("pip-services-commons-node");
 class CounterV1Schema extends pip_services_commons_node_1.ObjectSchema {
     constructor() {
         super();
+        this.withOptionalProperty('id', pip_services_commons_node_2.TypeCode.String);
         this.withRequiredProperty('name', pip_services_commons_node_2.TypeCode.String);
+        this.withOptionalProperty('source', pip_services_commons_node_2.TypeCode.String);
         this.withRequiredProperty('type', pip_services_commons_node_2.TypeCode.Long);
         this.withOptionalProperty('time', null); //TypeCode.DateTime);
         this.withOptionalProperty('last', null);

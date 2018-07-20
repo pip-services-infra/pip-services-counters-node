@@ -25,7 +25,7 @@ export class CountersPersistenceFixture {
                 counter.min = 1;
                 counter.average = 5;
 
-                this._persistence.create(
+                this._persistence.addOne(
                     null, 
                     counter, 
                     (err, counter) => {
@@ -39,7 +39,7 @@ export class CountersPersistenceFixture {
                 let counter = new CounterV1("test.counter2", CounterType.Increment);
                 counter.count = 1;
  
-                 this._persistence.create(
+                 this._persistence.addOne(
                     null, 
                     counter, 
                     (err, counter) => {
@@ -53,7 +53,7 @@ export class CountersPersistenceFixture {
                 let counter = new CounterV1("test1.counter1", CounterType.LastValue);
                 counter.last = 123;
 
-                this._persistence.create(
+                this._persistence.addOne(
                     null, 
                     counter, 
                     (err, counter) => {

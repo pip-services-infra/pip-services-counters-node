@@ -1,3 +1,5 @@
+let async = require('async');
+
 import { ConfigParams } from 'pip-services-commons-node';
 import { IConfigurable } from 'pip-services-commons-node';
 import { FilterParams } from 'pip-services-commons-node';
@@ -14,7 +16,7 @@ export class CountersMemoryPersistence implements IConfigurable {
 
     public constructor() { }
 
-    public configure(config: ConfigParams) : void {
+    public configure(config: ConfigParams): void {
         this._maxPageSize = config.getAsIntegerWithDefault('options.max_page_size', this._maxPageSize);
     }
 
@@ -32,6 +34,9 @@ export class CountersMemoryPersistence implements IConfigurable {
         if (this.matchString(counter.name, search))
             return true;
 
+        if (this.matchString(counter.source, search))
+            return true;
+
         return false;
     }
 
@@ -45,10 +50,10 @@ export class CountersMemoryPersistence implements IConfigurable {
         let nameStarts = filter.getAsNullableString("name_starts");
         let nameEnds = filter.getAsNullableString("name_ends");
         let groupName = filter.getAsNullableString("group");
-        if (groupName != null && ! groupName.endsWith("."))
+        if (groupName != null && !groupName.endsWith("."))
             groupName = groupName + ".";
         let counterName = filter.getAsNullableString("counter");
-        if (counterName != null && ! counterName.startsWith("."))
+        if (counterName != null && !counterName.startsWith("."))
             counterName = "." + counterName;
 
         paging = paging || new PagingParams();
@@ -98,7 +103,7 @@ export class CountersMemoryPersistence implements IConfigurable {
             let newCounter = new CounterV1(counter.name, counter.type);
             newCounter.count = oldCounter.count + counter.count;
             return newCounter;
-        } else if (counter.type == CounterType.Interval 
+        } else if (counter.type == CounterType.Interval
             || counter.type == CounterType.Statistics) {
 
             let newCounter = new CounterV1(counter.name, counter.type);
@@ -108,16 +113,16 @@ export class CountersMemoryPersistence implements IConfigurable {
             newCounter.max = Math.max(counter.max, oldCounter.max);
             newCounter.min = Math.min(counter.min, oldCounter.max);
             newCounter.average = ((counter.average * counter.count)
-                + (oldCounter.average * oldCounter.count)) 
+                + (oldCounter.average * oldCounter.count))
                 / (counter.count + oldCounter.count);
 
             return newCounter;
-        } else { 
+        } else {
             return counter;
         }
     }
 
-    public create(correlationId: string, counter: CounterV1,
+    public addOne(correlationId: string, counter: CounterV1,
         callback?: (err: any, counter: CounterV1) => void): void {
 
         if (counter == null) {
@@ -132,6 +137,14 @@ export class CountersMemoryPersistence implements IConfigurable {
         this._counters[counter.name] = counter;
 
         if (callback) callback(null, counter);
+    }
+
+    public addBatch(correlationId: string, counters: CounterV1[],
+        callback: (err: any) => void): void {
+
+        async.each(counters, (c, callback) => {
+            this.addOne(correlationId, c, callback);
+        }, callback);
     }
 
     public clear(correlationId: string, callback?: (err: any) => void): void {

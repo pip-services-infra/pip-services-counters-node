@@ -9,8 +9,11 @@ export interface ICountersPersistence extends ICleanable {
     getPageByFilter(correlationId: string, filter: FilterParams, paging: PagingParams,
         callback: (err: any, page: DataPage<CounterV1>) => void): void;
 
-    create(correlationId: string, counter: CounterV1,
+    addOne(correlationId: string, counter: CounterV1,
         callback?: (err: any, counter: CounterV1) => void): void;
-    
+
+    addBatch(correlationId: string, counters: CounterV1[],
+        callback: (err: any) => void): void;
+
     clear(correlationId: string, callback?: (err: any) => void): void;
 }

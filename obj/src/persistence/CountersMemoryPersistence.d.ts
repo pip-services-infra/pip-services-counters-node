@@ -13,6 +13,7 @@ export declare class CountersMemoryPersistence implements IConfigurable {
     private counterContains(counter, search);
     getPageByFilter(correlationId: string, filter: FilterParams, paging: PagingParams, callback: (err: any, page: DataPage<CounterV1>) => void): void;
     private mergeCounters(oldCounter, counter);
-    create(correlationId: string, counter: CounterV1, callback?: (err: any, counter: CounterV1) => void): void;
+    addOne(correlationId: string, counter: CounterV1, callback?: (err: any, counter: CounterV1) => void): void;
+    addBatch(correlationId: string, counters: CounterV1[], callback: (err: any) => void): void;
     clear(correlationId: string, callback?: (err: any) => void): void;
 }

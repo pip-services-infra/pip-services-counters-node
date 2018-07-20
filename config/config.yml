@@ -65,6 +65,10 @@
 
 # Default controller
 - descriptor: "pip-services-counters:controller:default:default:1.0"
+  options:
+    expire_cleanup_timeout: 60
+    expire_logs_timeout: 3
+    expire_errors_timeout: 30
 
 # Common HTTP endpoint
 - descriptor: "pip-services:endpoint:http:default:1.0"
@@ -84,7 +88,3 @@
 
 # Prometheus metrics service
 - descriptor: "pip-services:metrics-service:prometheus:default:1.0"
-  connection:
-    protocol: "http"
-    host: "0.0.0.0"
-    port: 8082
