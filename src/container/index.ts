@@ -1,3 +1,3 @@
-export { CountersProcess } from './CountersProcess';
-export { CountersSenecaPlugin } from './CountersSenecaPlugin';
-export { CountersLambdaFunction } from './CountersLambdaFunction';
+export { PerfMonProcess } from './PerfMonProcess';
+export { PerfMonSenecaPlugin } from './PerfMonSenecaPlugin';
+export { PerfMonLambdaFunction } from './PerfMonLambdaFunction';

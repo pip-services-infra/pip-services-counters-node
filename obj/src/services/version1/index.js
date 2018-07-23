@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var CountersHttpServiceV1_1 = require("./CountersHttpServiceV1");
-exports.CountersHttpServiceV1 = CountersHttpServiceV1_1.CountersHttpServiceV1;
-var CountersSenecaServiceV1_1 = require("./CountersSenecaServiceV1");
-exports.CountersSenecaServiceV1 = CountersSenecaServiceV1_1.CountersSenecaServiceV1;
+var PerfMonHttpServiceV1_1 = require("./PerfMonHttpServiceV1");
+exports.PerfMonHttpServiceV1 = PerfMonHttpServiceV1_1.PerfMonHttpServiceV1;
+var PerfMonSenecaServiceV1_1 = require("./PerfMonSenecaServiceV1");
+exports.PerfMonSenecaServiceV1 = PerfMonSenecaServiceV1_1.PerfMonSenecaServiceV1;
 //# sourceMappingURL=index.js.map

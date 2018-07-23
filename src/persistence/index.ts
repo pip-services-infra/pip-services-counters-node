@@ -1,4 +1,4 @@
-export { ICountersPersistence } from './ICountersPersistence';
-export { CountersMemoryPersistence } from './CountersMemoryPersistence';
-export { CountersMongoDbPersistence } from './CountersMongoDbPersistence';
-export { CountersMongoDbSchema } from './CountersMongoDbSchema';
+export { IPerfMonPersistence } from './IPerfMonPersistence';
+export { PerfMonMemoryPersistence } from './PerfMonMemoryPersistence';
+export { PerfMonMongoDbPersistence } from './PerfMonMongoDbPersistence';
+export { PerfMonMongoDbSchema } from './PerfMonMongoDbSchema';

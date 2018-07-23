@@ -1,2 +1,2 @@
-export { CountersHttpServiceV1 } from './CountersHttpServiceV1';
-export { CountersSenecaServiceV1 } from './CountersSenecaServiceV1';
+export { PerfMonHttpServiceV1 } from './PerfMonHttpServiceV1';
+export { PerfMonSenecaServiceV1 } from './PerfMonSenecaServiceV1';

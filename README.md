@@ -1,6 +1,6 @@
-# Counters Microservice
+# Perfmon Microservice
 
-This is a counters microservice from Pip.Services library. 
+This is a perforamce monitor microservice from Pip.Services library. 
 It collects performance metrics from distributed microservices, stores 
 and provides a single entry point to read all of them.
 
@@ -18,7 +18,7 @@ This microservice has no dependencies on other microservices.
 * [Configuration Guide](doc/Configuration.md)
 * [Deployment Guide](doc/Deployment.md)
 * Client SDKs
-  - [Node.js SDK](https://github.com/pip-services-infrastructure/pip-clients-counters-node)
+  - [Node.js SDK](https://github.com/pip-services-infrastructure/pip-clients-perfmon-node)
 * Communication Protocols
   - [HTTP Version 1](doc/HttpProtocolV1.md)
   - [Seneca Version 1](doc/SenecaProtocolV1.md)
@@ -71,7 +71,7 @@ interface ICountersV1 {
 
 Right now the only way to get the microservice is to check it out directly from github repository
 ```bash
-git clone git@github.com:pip-services-infrastructure/pip-services-counters.git
+git clone git@github.com:pip-services-infrastructure/pip-services-perfmon-node.git
 ```
 
 Pip.Service team is working to implement packaging and make stable releases available for your 
@@ -85,17 +85,17 @@ As the starting point you can use example configuration from **config.example.ya
 Example of microservice configuration
 ```yaml
 - descriptor: "pip-services-container:container-info:default:default:1.0"
-  name: "pip-services-counters"
-  description: "Counters microservice"
+  name: "pip-services-perfmon"
+  description: "Performance monitor microservice"
 
 - descriptor: "pip-services-commons:logger:console:default:1.0"
   level: "trace"
 
-- descriptor: "pip-services-counters:persistence:memory:default:1.0"
+- descriptor: "pip-services-perfmon:persistence:memory:default:1.0"
 
-- descriptor: "pip-services-counters:controller:default:default:1.0"
+- descriptor: "pip-services-perfmon:controller:default:default:1.0"
 
-- descriptor: "pip-services-counters:service:http:default:1.0"
+- descriptor: "pip-services-perfmon:service:http:default:1.0"
   connection:
     protocol: "http"
     host: "0.0.0.0"
@@ -119,7 +119,7 @@ If you use Node.js then you should add dependency to the client SDK into **packa
 {
     dependencies: {
         ...
-        "pip-clients-counters-node": "^1.0.*"
+        "pip-clients-perfmon-node": "^1.0.*"
         ...
     }
 }
@@ -127,7 +127,7 @@ If you use Node.js then you should add dependency to the client SDK into **packa
 
 Inside your code get the reference to the client SDK
 ```javascript
-var sdk = new require('pip-clients-counters-node');
+var sdk = new require('pip-clients-perfmon-node');
 ```
 
 Define client configuration parameters that match configuration of the microservice external API
@@ -145,7 +145,7 @@ var config = {
 Instantiate the client and open connection to the microservice
 ```javascript
 // Create the client instance
-var client = sdk.CountersHttpClientV1(config);
+var client = sdk.PerfMonHttpClientV1(config);
 
 // Connect to the microservice
 client.open(null, function(err) {

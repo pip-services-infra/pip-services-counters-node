@@ -1,5 +1,5 @@
 {
-    "name": "pip-services-counters-node",
+    "name": "pip-services-perfmon-node",
     "version": "1.0.0",
     "author": "Conceptual Vision Consulting LLC",
     "description": "Distributed trace counters microservice in Node.js",
@@ -20,7 +20,7 @@
     "noAnalyze": true,
     "repository": {
         "type": "git",
-        "url": "ssh://git@github.com:pip-services-infrastructure/pip-services-counters-node.git"
+        "url": "ssh://git@github.com:pip-services-infrastructure/pip-services-perfmon-node.git"
     },
     "license": "MIT",
     "engines": {

@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var CountersProcess_1 = require("./CountersProcess");
-exports.CountersProcess = CountersProcess_1.CountersProcess;
-var CountersSenecaPlugin_1 = require("./CountersSenecaPlugin");
-exports.CountersSenecaPlugin = CountersSenecaPlugin_1.CountersSenecaPlugin;
-var CountersLambdaFunction_1 = require("./CountersLambdaFunction");
-exports.CountersLambdaFunction = CountersLambdaFunction_1.CountersLambdaFunction;
+var PerfMonProcess_1 = require("./PerfMonProcess");
+exports.PerfMonProcess = PerfMonProcess_1.PerfMonProcess;
+var PerfMonSenecaPlugin_1 = require("./PerfMonSenecaPlugin");
+exports.PerfMonSenecaPlugin = PerfMonSenecaPlugin_1.PerfMonSenecaPlugin;
+var PerfMonLambdaFunction_1 = require("./PerfMonLambdaFunction");
+exports.PerfMonLambdaFunction = PerfMonLambdaFunction_1.PerfMonLambdaFunction;
 //# sourceMappingURL=index.js.map
