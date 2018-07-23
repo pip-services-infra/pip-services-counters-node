@@ -1,7 +1,7 @@
-let CountersProcess = require('../obj/src/container/CountersProcess').CountersProcess;
+let PerfMonProcess = require('../obj/src/container/PerfMonProcess').PerfMonProcess;
 
 try {
-    new CountersProcess().run(process.argv);
+    new PerfMonProcess().run(process.argv);
 } catch (ex) {
     console.error(ex);
 }
