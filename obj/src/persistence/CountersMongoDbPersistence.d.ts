@@ -7,10 +7,9 @@ import { ICountersPersistence } from './ICountersPersistence';
 export declare class CountersMongoDbPersistence extends IdentifiableMongoDbPersistence<CounterV1, string> implements ICountersPersistence {
     constructor();
     private composeFilter(filter);
-    private mergeCounters(oldCounter, counter);
     getPageByFilter(correlationId: string, filter: FilterParams, paging: PagingParams, callback: (err: any, page: DataPage<CounterV1>) => void): void;
     deleteByFilter(correlationId: string, filter: FilterParams, callback: (err: any) => void): void;
     addOne(correlationId: string, counter: CounterV1, callback?: (err: any, counter: CounterV1) => void): void;
     addBatch(correlationId: string, counters: CounterV1[], callback: (err: any) => void): void;
-    deleteExpired(correlationId: string, expireLogsTime: Date, expireErrorsTime: Date, callback: (err: any) => void): void;
+    deleteExpired(correlationId: string, expireTime: Date, callback: (err: any) => void): void;
 }

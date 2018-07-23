@@ -16,4 +16,6 @@ export interface ICountersPersistence extends ICleanable {
         callback: (err: any) => void): void;
 
     clear(correlationId: string, callback?: (err: any) => void): void;
+
+    deleteExpired(correlationId: string, expireTime: Date, callback: (err: any) => void): void;
 }

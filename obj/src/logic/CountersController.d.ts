@@ -11,14 +11,11 @@ import { CounterV1 } from '../data/version1/CounterV1';
 import { ICountersController } from './ICountersController';
 export declare class CountersController implements ICountersController, ICommandable, IConfigurable, IReferenceable, IOpenable {
     private _dependencyResolver;
-    private _readPersistence;
-    private _writePersistence;
+    private _persistence;
     private _commandSet;
     private _expireCleanupTimeout;
-    private _expireLogsTimeout;
-    private _expireErrorsTimeout;
+    private _expireTimeout;
     private _interval;
-    private _source;
     constructor();
     getCommandSet(): CommandSet;
     configure(config: ConfigParams): void;

@@ -2,9 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 let async = require('async');
 const pip_services_commons_node_1 = require("pip-services-commons-node");
-const pip_services_commons_node_2 = require("pip-services-commons-node");
 const pip_services_data_node_1 = require("pip-services-data-node");
-const CounterV1_1 = require("../data/version1/CounterV1");
 const CountersMongoDbSchema_1 = require("./CountersMongoDbSchema");
 class CountersMongoDbPersistence extends pip_services_data_node_1.IdentifiableMongoDbPersistence {
     constructor() {
@@ -66,34 +64,6 @@ class CountersMongoDbPersistence extends pip_services_data_node_1.IdentifiableMo
             criteria.push({ time: { $lt: toTime } });
         return criteria.length > 0 ? { $and: criteria } : null;
     }
-    mergeCounters(oldCounter, counter) {
-        // If types are different then override old value
-        if (oldCounter.type != counter.type)
-            return counter;
-        if (counter.type == pip_services_commons_node_2.CounterType.Increment) {
-            let newCounter = new CounterV1_1.CounterV1(counter.name, counter.type);
-            newCounter.count = oldCounter.count + counter.count;
-            return newCounter;
-        }
-        else if (counter.type == pip_services_commons_node_2.CounterType.Interval
-            || counter.type == pip_services_commons_node_2.CounterType.Statistics) {
-            let newCounter = new CounterV1_1.CounterV1(counter.name, counter.type);
-            newCounter.id = oldCounter.id;
-            newCounter.source = oldCounter.source;
-            newCounter.time = counter.time;
-            newCounter.last = counter.last;
-            newCounter.count = counter.count + oldCounter.count;
-            newCounter.max = Math.max(counter.max, oldCounter.max);
-            newCounter.min = Math.min(counter.min, oldCounter.max);
-            newCounter.average = ((counter.average * counter.count)
-                + (oldCounter.average * oldCounter.count))
-                / (counter.count + oldCounter.count);
-            return newCounter;
-        }
-        else {
-            return counter;
-        }
-    }
     getPageByFilter(correlationId, filter, paging, callback) {
         super.getPageByFilter(correlationId, this.composeFilter(filter), paging, null, null, callback);
     }
@@ -106,24 +76,7 @@ class CountersMongoDbPersistence extends pip_services_data_node_1.IdentifiableMo
                 callback(null, null);
             return;
         }
-        let oldCounter = null;
-        async.series([
-            (callback) => {
-                this.getPageByFilter(correlationId, pip_services_commons_node_1.FilterParams.fromTuples("id", counter.id), null, (err, page) => {
-                    oldCounter = page.data[0];
-                    callback(err, oldCounter);
-                });
-            },
-            (callback) => {
-                if (oldCounter) {
-                    counter = this.mergeCounters(oldCounter, counter);
-                }
-                super.set(correlationId, counter, callback);
-            }
-        ], (err, results) => {
-            if (callback)
-                callback(err, results[1]);
-        });
+        super.set(correlationId, counter, callback);
     }
     addBatch(correlationId, counters, callback) {
         if (counters == null || counters.length == 0) {
@@ -132,49 +85,29 @@ class CountersMongoDbPersistence extends pip_services_data_node_1.IdentifiableMo
             return;
         }
         let batch = this._model.collection.initializeUnorderedBulkOp();
-        async.each(counters, (counter, callback) => {
-            let oldCounter = null;
-            async.series([
-                (callback) => {
-                    this.getPageByFilter(correlationId, pip_services_commons_node_1.FilterParams.fromTuples("id", counter.id), null, (err, page) => {
-                        oldCounter = page.data[0];
-                        callback(err, oldCounter);
-                    });
-                },
-                (callback) => {
-                    if (oldCounter) {
-                        counter = this.mergeCounters(oldCounter, counter);
-                    }
-                    batch.find({ _id: counter.id }).upsert().replaceOne({
-                        _id: counter.id,
-                        name: counter.name,
-                        source: counter.source,
-                        type: counter.type,
-                        last: counter.last,
-                        count: counter.count,
-                        min: counter.min,
-                        max: counter.max,
-                        average: counter.average,
-                        time: counter.time
-                    });
-                    callback();
-                }
-            ], callback);
-        }, (err) => {
-            if (!err) {
-                batch.execute((err) => {
-                    if (!err)
-                        this._logger.trace(correlationId, "Created %d data in %s", counters.length, this._collection);
-                });
-            }
-            if (callback)
-                callback(err);
+        for (let counter of counters) {
+            batch.find({ _id: counter.id }).upsert().replaceOne({
+                _id: counter.id,
+                name: counter.name,
+                source: counter.source,
+                type: counter.type,
+                last: counter.last,
+                count: counter.count,
+                min: counter.min,
+                max: counter.max,
+                average: counter.average,
+                time: counter.time
+            });
+        }
+        batch.execute((err) => {
+            if (!err)
+                this._logger.trace(correlationId, "Created %d data in %s", counters.length, this._collection);
         });
-    }
-    deleteExpired(correlationId, expireLogsTime, expireErrorsTime, callback) {
-        this.deleteByFilter(correlationId, pip_services_commons_node_1.FilterParams.fromTuples("to_time", expireLogsTime), null);
         if (callback)
             callback(null);
+    }
+    deleteExpired(correlationId, expireTime, callback) {
+        this.deleteByFilter(correlationId, pip_services_commons_node_1.FilterParams.fromTuples("to_time", expireTime), callback);
     }
 }
 exports.CountersMongoDbPersistence = CountersMongoDbPersistence;

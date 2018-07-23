@@ -8,4 +8,5 @@ export interface ICountersPersistence extends ICleanable {
     addOne(correlationId: string, counter: CounterV1, callback?: (err: any, counter: CounterV1) => void): void;
     addBatch(correlationId: string, counters: CounterV1[], callback: (err: any) => void): void;
     clear(correlationId: string, callback?: (err: any) => void): void;
+    deleteExpired(correlationId: string, expireTime: Date, callback: (err: any) => void): void;
 }
