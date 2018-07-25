@@ -51,7 +51,7 @@ class AddMongoDbCountersBenchmark extends pip_benchmark_node_1.Benchmark {
     }
     execute(callback) {
         let counters = [];
-        for (let siteNumber = 1; siteNumber <= this._sourceQuantity; siteNumber++) {
+        for (let sourceNumber = 1; sourceNumber <= this._sourceQuantity; sourceNumber++) {
             counters.push({
                 id: this.getRandomString(10),
                 name: this.getRandomString(10),
