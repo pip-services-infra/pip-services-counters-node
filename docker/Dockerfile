@@ -1,16 +1,26 @@
 FROM pipdevs/node:8.4.0
 
-# set working directory
+# Install git and ssh
+RUN apk update && apk add git && apk add openssh
+
+# Copy local ssh keys
+COPY docker/id_rsa /root/.ssh/
+
+# Setup ssh access to github repositories
+RUN chmod 600 /root/.ssh/id_rsa* \
+    && ssh-keyscan github.com >> ~/.ssh/known_hosts \
+    && ssh-keyscan gitlab.com >> ~/.ssh/known_hosts 
+
+# Set working directory
 WORKDIR /app
 
-# copy project file
+# Copy project file
 COPY package.json .
 
-# install only production dependencies
-#RUN npm install --only=production
-RUN npm install
+# Install ALL node_modules, including 'devDependencies'
+RUN npm install --no-cache
 
-# copy the entire project
+# Copy entire project
 COPY . .
 
 # set default environment variables
