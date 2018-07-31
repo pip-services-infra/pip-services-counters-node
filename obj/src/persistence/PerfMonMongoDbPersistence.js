@@ -86,6 +86,7 @@ class PerfMonMongoDbPersistence extends pip_services_data_node_1.IdentifiableMon
         }
         let batch = this._model.collection.initializeUnorderedBulkOp();
         for (let counter of counters) {
+<<<<<<< HEAD
             if (batch) {
                 batch.find({ _id: counter.id }).upsert().updateOne({
                     $setOnInsert: { name: counter.name, source: counter.source, type: counter.type },
@@ -99,6 +100,25 @@ class PerfMonMongoDbPersistence extends pip_services_data_node_1.IdentifiableMon
                 //     this._logger.trace(correlationId, "Created %d data in %s", counters.length, this._collection)
             });
         }
+=======
+            batch.find({ _id: counter.id }).upsert().replaceOne({
+                _id: counter.id,
+                name: counter.name,
+                source: counter.source,
+                type: counter.type,
+                last: counter.last,
+                count: counter.count,
+                min: counter.min,
+                max: counter.max,
+                average: counter.average,
+                time: counter.time
+            });
+        }
+        batch.execute((err) => {
+            if (!err)
+                this._logger.trace(correlationId, "Created %d data in %s", counters.length, this._collection);
+        });
+>>>>>>> 1ceae54b6023987d7b73cd21b526e80e43376fa6
         if (callback)
             callback(null);
     }
