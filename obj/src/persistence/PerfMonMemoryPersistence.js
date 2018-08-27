@@ -4,7 +4,7 @@ let async = require('async');
 const pip_services_commons_node_1 = require("pip-services-commons-node");
 const pip_services_commons_node_2 = require("pip-services-commons-node");
 const pip_services_commons_node_3 = require("pip-services-commons-node");
-const pip_services_commons_node_4 = require("pip-services-commons-node");
+const pip_services_components_node_1 = require("pip-services-components-node");
 const CounterV1_1 = require("../data/version1/CounterV1");
 class PerfMonMemoryPersistence {
     constructor() {
@@ -79,13 +79,13 @@ class PerfMonMemoryPersistence {
         // If types are different then override old value
         if (oldCounter.type != counter.type)
             return counter;
-        if (counter.type == pip_services_commons_node_4.CounterType.Increment) {
+        if (counter.type == pip_services_components_node_1.CounterType.Increment) {
             let newCounter = new CounterV1_1.CounterV1(counter.name, counter.type);
             newCounter.count = oldCounter.count + counter.count;
             return newCounter;
         }
-        else if (counter.type == pip_services_commons_node_4.CounterType.Interval
-            || counter.type == pip_services_commons_node_4.CounterType.Statistics) {
+        else if (counter.type == pip_services_components_node_1.CounterType.Interval
+            || counter.type == pip_services_components_node_1.CounterType.Statistics) {
             let newCounter = new CounterV1_1.CounterV1(counter.name, counter.type);
             newCounter.last = counter.last;
             newCounter.count = counter.count + oldCounter.count;

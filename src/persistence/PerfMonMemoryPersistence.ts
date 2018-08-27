@@ -5,7 +5,7 @@ import { IConfigurable } from 'pip-services-commons-node';
 import { FilterParams } from 'pip-services-commons-node';
 import { PagingParams } from 'pip-services-commons-node';
 import { DataPage } from 'pip-services-commons-node';
-import { CounterType } from 'pip-services-commons-node';
+import { CounterType } from 'pip-services-components-node';
 
 import { CounterV1 } from '../data/version1/CounterV1';
 import { IPerfMonPersistence } from './IPerfMonPersistence';

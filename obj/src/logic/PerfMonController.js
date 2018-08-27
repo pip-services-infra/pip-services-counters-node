@@ -27,7 +27,7 @@ class PerfMonController {
         this._dependencyResolver.setReferences(references);
         this._persistence = this._dependencyResolver.getOneRequired('persistence');
     }
-    isOpened() {
+    isOpen() {
         return this._interval != null;
     }
     open(correlationId, callback) {

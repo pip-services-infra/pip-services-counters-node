@@ -6,7 +6,7 @@ let assert = require('chai').assert;
 import { ConfigParams } from 'pip-services-commons-node';
 import { Descriptor } from 'pip-services-commons-node';
 import { References } from 'pip-services-commons-node';
-import { CounterType } from 'pip-services-commons-node';
+import { CounterType } from 'pip-services-components-node';
 import { FilterParams } from 'pip-services-commons-node';
 
 import { CounterV1 } from '../../src/data/version1/CounterV1';

@@ -2,9 +2,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 let async = require('async');
 const pip_services_commons_node_1 = require("pip-services-commons-node");
-const pip_services_data_node_1 = require("pip-services-data-node");
+const pip_services_mongodb_node_1 = require("pip-services-mongodb-node");
 const PerfMonMongoDbSchema_1 = require("./PerfMonMongoDbSchema");
-class PerfMonMongoDbPersistence extends pip_services_data_node_1.IdentifiableMongoDbPersistence {
+class PerfMonMongoDbPersistence extends pip_services_mongodb_node_1.IdentifiableMongoDbPersistence {
     constructor() {
         super('counters', PerfMonMongoDbSchema_1.PerfMonMongoDbSchema());
         this._maxPageSize = 1000;

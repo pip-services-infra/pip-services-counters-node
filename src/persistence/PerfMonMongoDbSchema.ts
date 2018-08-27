@@ -1,5 +1,5 @@
 import { Schema } from 'mongoose';
-import { CounterType } from 'pip-services-commons-node';
+import { CounterType } from 'pip-services-components-node';
 
 export let PerfMonMongoDbSchema = function(collection?: string) {
     collection = collection || 'logs';

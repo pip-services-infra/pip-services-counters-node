@@ -20,7 +20,7 @@ export declare class PerfMonController implements IPerfMonController, ICommandab
     getCommandSet(): CommandSet;
     configure(config: ConfigParams): void;
     setReferences(references: IReferences): void;
-    isOpened(): boolean;
+    isOpen(): boolean;
     open(correlationId: string, callback: (err: any) => void): void;
     close(correlationId: string, callback: (err: any) => void): void;
     writeCounter(correlationId: string, counter: CounterV1, callback?: (err: any, counter: CounterV1) => void): void;

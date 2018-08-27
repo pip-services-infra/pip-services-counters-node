@@ -1,10 +1,10 @@
 import { References } from 'pip-services-commons-node';
 import { Descriptor } from 'pip-services-commons-node';
 import { ConfigParams } from 'pip-services-commons-node';
-import { ConsoleLogger } from 'pip-services-commons-node';
+import { ConsoleLogger } from 'pip-services-components-node';
 import { ConfigException } from 'pip-services-commons-node';
-import { SenecaPlugin } from 'pip-services-net-node';
-import { SenecaInstance } from 'pip-services-net-node';
+import { SenecaPlugin } from 'pip-services-seneca-node';
+import { SenecaInstance } from 'pip-services-seneca-node';
 
 import { PerfMonMemoryPersistence } from '../persistence/PerfMonMemoryPersistence';
 import { PerfMonController } from '../logic/PerfMonController';
@@ -35,8 +35,8 @@ export class PerfMonSenecaPlugin extends SenecaPlugin {
         service.configure(ConfigParams.fromValue(serviceOptions));
 
         return References.fromTuples(
-            new Descriptor('pip-services-commons', 'logger', 'console', 'default', '1.0'), logger,
-            new Descriptor('pip-services-net', 'seneca', 'instance', 'default', '1.0'), senecaInstance,
+            new Descriptor('pip-services', 'logger', 'console', 'default', '1.0'), logger,
+            new Descriptor('pip-services-seneca', 'seneca', 'instance', 'default', '1.0'), senecaInstance,
             new Descriptor('pip-services-perfmon', 'persistence', 'memory', 'default', '1.0'), persistence,
             new Descriptor('pip-services-perfmon', 'controller', 'default', 'default', '1.0'), controller,
             new Descriptor('pip-services-perfmon', 'service', 'seneca', 'default', '1.0'), service

@@ -12,7 +12,7 @@ import { PagingParams } from 'pip-services-commons-node';
 import { DataPage } from 'pip-services-commons-node';
 import { CommandSet } from 'pip-services-commons-node';
 import { ICommandable } from 'pip-services-commons-node';
-import { ContextInfo } from 'pip-services-commons-node';
+import { ContextInfo } from 'pip-services-components-node';
 
 import { CounterV1 } from '../data/version1/CounterV1';
 import { IPerfMonPersistence } from '../persistence/IPerfMonPersistence';
@@ -51,7 +51,7 @@ export class PerfMonController
         this._persistence = this._dependencyResolver.getOneRequired<IPerfMonPersistence>('persistence');
     }
 
-    public isOpened(): boolean {
+    public isOpen(): boolean {
         return this._interval != null;
     }
 
