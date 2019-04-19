@@ -2,10 +2,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 let async = require('async');
 const pip_benchmark_node_1 = require("pip-benchmark-node");
-const pip_services_commons_node_1 = require("pip-services-commons-node");
-const pip_services_commons_node_2 = require("pip-services-commons-node");
-const pip_services_commons_node_3 = require("pip-services-commons-node");
-const pip_services_commons_node_4 = require("pip-services-commons-node");
+const pip_services3_commons_node_1 = require("pip-services3-commons-node");
+const pip_services3_commons_node_2 = require("pip-services3-commons-node");
+const pip_services3_commons_node_3 = require("pip-services3-commons-node");
+const pip_services3_commons_node_4 = require("pip-services3-commons-node");
 const PerfMonMongoDbPersistence_1 = require("../src/persistence/PerfMonMongoDbPersistence");
 const PerfMonController_1 = require("../src/logic/PerfMonController");
 class AddMongoDbCountersBenchmark extends pip_benchmark_node_1.Benchmark {
@@ -15,7 +15,7 @@ class AddMongoDbCountersBenchmark extends pip_benchmark_node_1.Benchmark {
     setUp(callback) {
         this._initialRecordNumber = this.context.parameters.InitialRecordNumber.getAsInteger();
         this._sourceQuantity = this.context.parameters.SourceQuantity.getAsInteger();
-        this._startTime = pip_services_commons_node_1.DateTimeConverter.toDateTime(this.context.parameters.StartTime.getAsString());
+        this._startTime = pip_services3_commons_node_1.DateTimeConverter.toDateTime(this.context.parameters.StartTime.getAsString());
         this._interval = this.context.parameters.Interval.getAsInteger();
         this._time = this._startTime;
         this._source = this.getRandomString(10);
@@ -24,9 +24,9 @@ class AddMongoDbCountersBenchmark extends pip_benchmark_node_1.Benchmark {
         let mongoPort = this.context.parameters.MongoPort.getAsInteger();
         let mongoDb = this.context.parameters.MongoDb.getAsString();
         this._persistence = new PerfMonMongoDbPersistence_1.PerfMonMongoDbPersistence();
-        this._persistence.configure(pip_services_commons_node_2.ConfigParams.fromTuples('connection.uri', mongoUri, 'connection.host', mongoHost, 'connection.port', mongoPort, 'connection.database', mongoDb));
+        this._persistence.configure(pip_services3_commons_node_2.ConfigParams.fromTuples('connection.uri', mongoUri, 'connection.host', mongoHost, 'connection.port', mongoPort, 'connection.database', mongoDb));
         this._controller = new PerfMonController_1.PerfMonController();
-        let references = pip_services_commons_node_4.References.fromTuples(new pip_services_commons_node_3.Descriptor('pip-services-perfmon', 'persistence', 'mongodb', 'default', '1.0'), this._persistence, new pip_services_commons_node_3.Descriptor('pip-services-perfmon', 'controller', 'default', 'default', '1.0'), this._controller);
+        let references = pip_services3_commons_node_4.References.fromTuples(new pip_services3_commons_node_3.Descriptor('pip-services-perfmon', 'persistence', 'mongodb', 'default', '1.0'), this._persistence, new pip_services3_commons_node_3.Descriptor('pip-services-perfmon', 'controller', 'default', 'default', '1.0'), this._controller);
         this._controller.setReferences(references);
         this._persistence.open(null, (err) => {
             if (err == null)

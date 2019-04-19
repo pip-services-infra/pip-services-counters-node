@@ -1,5 +1,5 @@
 let process = require('process');
-import { ConfigParams } from 'pip-services-commons-node';
+import { ConfigParams } from 'pip-services3-commons-node';
 
 import { PerfMonMongoDbPersistence } from '../../src/persistence/PerfMonMongoDbPersistence';
 import { PerfMonPersistenceFixture } from './PerfMonPersistenceFixture';

@@ -3,11 +3,11 @@ let async = require('async');
 let restify = require('restify');
 let assert = require('chai').assert;
 
-import { ConfigParams } from 'pip-services-commons-node';
-import { Descriptor } from 'pip-services-commons-node';
-import { References } from 'pip-services-commons-node';
-import { FilterParams } from 'pip-services-commons-node';
-import { CounterType } from 'pip-services-components-node';
+import { ConfigParams } from 'pip-services3-commons-node';
+import { Descriptor } from 'pip-services3-commons-node';
+import { References } from 'pip-services3-commons-node';
+import { FilterParams } from 'pip-services3-commons-node';
+import { CounterType } from 'pip-services3-components-node';
 
 import { CounterV1 } from '../../../src/data/version1/CounterV1';
 import { PerfMonMemoryPersistence } from '../../../src/persistence/PerfMonMemoryPersistence';

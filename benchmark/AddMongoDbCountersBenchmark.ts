@@ -1,13 +1,13 @@
 let async = require('async');
 
 import { Benchmark } from 'pip-benchmark-node';
-import { DateTimeConverter } from 'pip-services-commons-node';
+import { DateTimeConverter } from 'pip-services3-commons-node';
 
-import { ConfigParams } from 'pip-services-commons-node';
-import { Descriptor } from 'pip-services-commons-node';
-import { References } from 'pip-services-commons-node';
+import { ConfigParams } from 'pip-services3-commons-node';
+import { Descriptor } from 'pip-services3-commons-node';
+import { References } from 'pip-services3-commons-node';
 
-import { ErrorDescription } from 'pip-services-commons-node';
+import { ErrorDescription } from 'pip-services3-commons-node';
 import { CounterV1 } from '../src/data/version1/CounterV1';
 import { PerfMonMongoDbPersistence } from '../src/persistence/PerfMonMongoDbPersistence';
 import { PerfMonController } from '../src/logic/PerfMonController';

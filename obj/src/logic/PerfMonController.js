@@ -2,16 +2,16 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 let _ = require('lodash');
 let async = require('async');
-const pip_services_commons_node_1 = require("pip-services-commons-node");
-const pip_services_commons_node_2 = require("pip-services-commons-node");
+const pip_services3_commons_node_1 = require("pip-services3-commons-node");
+const pip_services3_commons_node_2 = require("pip-services3-commons-node");
 const PerfMonCommandSet_1 = require("./PerfMonCommandSet");
 class PerfMonController {
     constructor() {
         this._expireCleanupTimeout = 60; // 60 min
         this._expireTimeout = 3; // 3 days
         this._interval = null;
-        this._dependencyResolver = new pip_services_commons_node_2.DependencyResolver();
-        this._dependencyResolver.put('persistence', new pip_services_commons_node_1.Descriptor('pip-services-perfmon', 'persistence', '*', '*', '*'));
+        this._dependencyResolver = new pip_services3_commons_node_2.DependencyResolver();
+        this._dependencyResolver.put('persistence', new pip_services3_commons_node_1.Descriptor('pip-services-perfmon', 'persistence', '*', '*', '*'));
     }
     getCommandSet() {
         if (this._commandSet == null)

@@ -1,4 +1,4 @@
-import { CounterType } from 'pip-services-components-node';
+import { CounterType } from 'pip-services3-components-node';
 
 export class CounterV1 {
     public constructor(name: string, type: CounterType) {

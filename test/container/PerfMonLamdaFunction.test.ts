@@ -2,12 +2,12 @@ let _ = require('lodash');
 let async = require('async');
 let assert = require('chai').assert;
 
-import { Descriptor } from 'pip-services-commons-node';
-import { ConfigParams } from 'pip-services-commons-node';
-import { References } from 'pip-services-commons-node';
-import { ConsoleLogger } from 'pip-services-components-node';
-import { CounterType } from 'pip-services-components-node';
-import { FilterParams } from 'pip-services-commons-node';
+import { Descriptor } from 'pip-services3-commons-node';
+import { ConfigParams } from 'pip-services3-commons-node';
+import { References } from 'pip-services3-commons-node';
+import { ConsoleLogger } from 'pip-services3-components-node';
+import { CounterType } from 'pip-services3-components-node';
+import { FilterParams } from 'pip-services3-commons-node';
 
 import { CounterV1 } from '../../src/data/version1/CounterV1';
 import { PerfMonMemoryPersistence } from '../../src/persistence/PerfMonMemoryPersistence';

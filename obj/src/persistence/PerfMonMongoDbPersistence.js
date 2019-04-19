@@ -1,16 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 let async = require('async');
-const pip_services_commons_node_1 = require("pip-services-commons-node");
-const pip_services_mongodb_node_1 = require("pip-services-mongodb-node");
+const pip_services3_commons_node_1 = require("pip-services3-commons-node");
+const pip_services3_mongodb_node_1 = require("pip-services3-mongodb-node");
 const PerfMonMongoDbSchema_1 = require("./PerfMonMongoDbSchema");
-class PerfMonMongoDbPersistence extends pip_services_mongodb_node_1.IdentifiableMongoDbPersistence {
+class PerfMonMongoDbPersistence extends pip_services3_mongodb_node_1.IdentifiableMongoDbPersistence {
     constructor() {
         super('counters', PerfMonMongoDbSchema_1.PerfMonMongoDbSchema());
         this._maxPageSize = 1000;
     }
     composeFilter(filter) {
-        filter = filter || new pip_services_commons_node_1.FilterParams();
+        filter = filter || new pip_services3_commons_node_1.FilterParams();
         let criteria = [];
         let search = filter.getAsNullableString("search");
         if (search != null) {
@@ -103,7 +103,7 @@ class PerfMonMongoDbPersistence extends pip_services_mongodb_node_1.Identifiable
             callback(null);
     }
     deleteExpired(correlationId, expireTime, callback) {
-        this.deleteByFilter(correlationId, pip_services_commons_node_1.FilterParams.fromTuples("to_time", expireTime), callback);
+        this.deleteByFilter(correlationId, pip_services3_commons_node_1.FilterParams.fromTuples("to_time", expireTime), callback);
     }
 }
 exports.PerfMonMongoDbPersistence = PerfMonMongoDbPersistence;

@@ -1,10 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 let async = require('async');
-const pip_services_commons_node_1 = require("pip-services-commons-node");
-const pip_services_commons_node_2 = require("pip-services-commons-node");
-const pip_services_commons_node_3 = require("pip-services-commons-node");
-const pip_services_components_node_1 = require("pip-services-components-node");
+let _ = require('lodash');
+const pip_services3_commons_node_1 = require("pip-services3-commons-node");
+const pip_services3_commons_node_2 = require("pip-services3-commons-node");
+const pip_services3_commons_node_3 = require("pip-services3-commons-node");
+const pip_services3_components_node_1 = require("pip-services3-components-node");
 const CounterV1_1 = require("../data/version1/CounterV1");
 class PerfMonMemoryPersistence {
     constructor() {
@@ -30,7 +31,7 @@ class PerfMonMemoryPersistence {
         return false;
     }
     getPageByFilter(correlationId, filter, paging, callback) {
-        filter = filter || new pip_services_commons_node_1.FilterParams();
+        filter = filter || new pip_services3_commons_node_1.FilterParams();
         let search = filter.getAsNullableString("search");
         let type = filter.getAsNullableInteger("type");
         let name = filter.getAsNullableString("name");
@@ -42,7 +43,7 @@ class PerfMonMemoryPersistence {
         let counterName = filter.getAsNullableString("counter");
         if (counterName != null && !counterName.startsWith("."))
             counterName = "." + counterName;
-        paging = paging || new pip_services_commons_node_2.PagingParams();
+        paging = paging || new pip_services3_commons_node_2.PagingParams();
         let skip = paging.getSkip(0);
         let take = paging.getTake(this._maxPageSize);
         let data = [];
@@ -72,20 +73,20 @@ class PerfMonMemoryPersistence {
                 break;
         }
         let total = data.length;
-        let page = new pip_services_commons_node_3.DataPage(data, total);
+        let page = new pip_services3_commons_node_3.DataPage(data, total);
         callback(null, page);
     }
     mergeCounters(oldCounter, counter) {
         // If types are different then override old value
         if (oldCounter.type != counter.type)
             return counter;
-        if (counter.type == pip_services_components_node_1.CounterType.Increment) {
+        if (counter.type == pip_services3_components_node_1.CounterType.Increment) {
             let newCounter = new CounterV1_1.CounterV1(counter.name, counter.type);
             newCounter.count = oldCounter.count + counter.count;
             return newCounter;
         }
-        else if (counter.type == pip_services_components_node_1.CounterType.Interval
-            || counter.type == pip_services_components_node_1.CounterType.Statistics) {
+        else if (counter.type == pip_services3_components_node_1.CounterType.Interval
+            || counter.type == pip_services3_components_node_1.CounterType.Statistics) {
             let newCounter = new CounterV1_1.CounterV1(counter.name, counter.type);
             newCounter.last = counter.last;
             newCounter.count = counter.count + oldCounter.count;

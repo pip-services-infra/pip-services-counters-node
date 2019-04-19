@@ -1,9 +1,9 @@
 let async = require('async');
 let assert = require('chai').assert;
 
-import { FilterParams } from 'pip-services-commons-node';
-import { PagingParams } from 'pip-services-commons-node';
-import { CounterType } from 'pip-services-components-node';
+import { FilterParams } from 'pip-services3-commons-node';
+import { PagingParams } from 'pip-services3-commons-node';
+import { CounterType } from 'pip-services3-components-node';
 
 import { CounterV1 } from '../../src/data/version1/CounterV1';
 import { IPerfMonPersistence } from '../../src/persistence/IPerfMonPersistence';
