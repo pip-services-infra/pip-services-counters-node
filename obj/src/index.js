@@ -8,5 +8,5 @@ __export(require("./persistence"));
 __export(require("./logic"));
 __export(require("./services/version1"));
 __export(require("./build"));
-//module.exports = require('./container/CountersSenecaPlugin');
+//module.exports = require('./container/CountersSenecaPlugin'); 
 //# sourceMappingURL=index.js.map

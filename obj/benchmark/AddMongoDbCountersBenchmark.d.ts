@@ -11,7 +11,7 @@ export declare class AddMongoDbCountersBenchmark extends Benchmark {
     constructor();
     setUp(callback: (err: any) => void): void;
     tearDown(callback: (err: any) => void): void;
-    private getRandomString;
-    private getRandomInteger;
+    private getRandomString(length);
+    private getRandomInteger(min, max);
     execute(callback: (err: any) => void): void;
 }

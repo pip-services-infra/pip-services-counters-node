@@ -10,10 +10,10 @@ export declare class PerfMonMemoryPersistence implements IPerfMonPersistence, IC
     private _counters;
     constructor();
     configure(config: ConfigParams): void;
-    private matchString;
-    private counterContains;
+    private matchString(value, search);
+    private counterContains(counter, search);
     getPageByFilter(correlationId: string, filter: FilterParams, paging: PagingParams, callback: (err: any, page: DataPage<CounterV1>) => void): void;
-    private mergeCounters;
+    private mergeCounters(oldCounter, counter);
     addOne(correlationId: string, counter: CounterV1, callback?: (err: any, counter: CounterV1) => void): void;
     addBatch(correlationId: string, counters: CounterV1[], callback: (err: any) => void): void;
     clear(correlationId: string, callback?: (err: any) => void): void;

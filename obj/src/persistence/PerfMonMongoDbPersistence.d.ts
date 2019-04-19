@@ -6,7 +6,7 @@ import { CounterV1 } from '../data/version1/CounterV1';
 import { IPerfMonPersistence } from './IPerfMonPersistence';
 export declare class PerfMonMongoDbPersistence extends IdentifiableMongoDbPersistence<CounterV1, string> implements IPerfMonPersistence {
     constructor();
-    private composeFilter;
+    private composeFilter(filter);
     getPageByFilter(correlationId: string, filter: FilterParams, paging: PagingParams, callback: (err: any, page: DataPage<CounterV1>) => void): void;
     deleteByFilter(correlationId: string, filter: FilterParams, callback: (err: any) => void): void;
     addOne(correlationId: string, counter: CounterV1, callback?: (err: any, counter: CounterV1) => void): void;
