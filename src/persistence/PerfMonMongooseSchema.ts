@@ -1,7 +1,7 @@
 import { Schema } from 'mongoose';
 import { CounterType } from 'pip-services3-components-node';
 
-export let PerfMonMongoDbSchema = function(collection?: string) {
+export let PerfMonMongooseSchema = function(collection?: string) {
     collection = collection || 'logs';
 
     let PerfMonSchema = new Schema(

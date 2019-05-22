@@ -6,17 +6,17 @@ import { FilterParams } from 'pip-services3-commons-node';
 import { PagingParams } from 'pip-services3-commons-node';
 import { DataPage } from 'pip-services3-commons-node';
 import { CounterType } from 'pip-services3-components-node';
-import { IdentifiableMongoDbPersistence } from 'pip-services3-mongodb-node';
+import { IdentifiableMongoosePersistence } from 'pip-services3-mongoose-node';
 
 
 import { CounterV1 } from '../data/version1/CounterV1';
 import { IPerfMonPersistence } from './IPerfMonPersistence';
-import { PerfMonMongoDbSchema } from './PerfMonMongoDbSchema';
+import { PerfMonMongooseSchema } from './PerfMonMongooseSchema';
 
-export class PerfMonMongoDbPersistence extends IdentifiableMongoDbPersistence<CounterV1, string> implements IPerfMonPersistence {
+export class PerfMonMongoDbPersistence extends IdentifiableMongoosePersistence<CounterV1, string> implements IPerfMonPersistence {
 
     constructor() {
-        super('counters', PerfMonMongoDbSchema());
+        super('counters', PerfMonMongooseSchema());
         this._maxPageSize = 1000;
     }
 

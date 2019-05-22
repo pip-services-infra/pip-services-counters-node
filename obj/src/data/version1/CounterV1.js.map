@@ -1,1 +1,1 @@
-{"version":3,"file":"CounterV1.js","sourceRoot":"","sources":["../../../../src/data/version1/CounterV1.ts"],"names":[],"mappings":";;AAEA;IACI,YAAmB,IAAY,EAAE,IAAiB;QAC9C,IAAI,CAAC,IAAI,GAAG,IAAI,CAAC;QACjB,IAAI,CAAC,IAAI,GAAG,IAAI,CAAC;IACrB,CAAC;CAYJ;AAhBD,8BAgBC"}
+{"version":3,"file":"CounterV1.js","sourceRoot":"","sources":["../../../../src/data/version1/CounterV1.ts"],"names":[],"mappings":";;AAEA,MAAa,SAAS;IAClB,YAAmB,IAAY,EAAE,IAAiB;QAC9C,IAAI,CAAC,IAAI,GAAG,IAAI,CAAC;QACjB,IAAI,CAAC,IAAI,GAAG,IAAI,CAAC;IACrB,CAAC;CAYJ;AAhBD,8BAgBC"}
