@@ -1,5 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var PerfMonHttpServiceV1_1 = require("./PerfMonHttpServiceV1");
-exports.PerfMonHttpServiceV1 = PerfMonHttpServiceV1_1.PerfMonHttpServiceV1;
+var CountersHttpServiceV1_1 = require("./CountersHttpServiceV1");
+exports.CountersHttpServiceV1 = CountersHttpServiceV1_1.CountersHttpServiceV1;
 //# sourceMappingURL=index.js.map

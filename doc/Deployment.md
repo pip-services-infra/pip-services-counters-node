@@ -34,7 +34,7 @@ To learn more about Seneca microservices framework to go http://senecajs.org
     ...
     "dependencies": {
         ....
-        "pip-services-perfmon": "^1.0.0",
+        "pip-services-counters": "^1.0.0",
         ...
     }
 }
@@ -72,7 +72,7 @@ var config = {
     }
 };
 
-var plugin = require('pip-services-perfmon-node').CountersSenecaPlugin;
+var plugin = require('pip-services-counters-node').CountersSenecaPlugin;
 
 seneca.use(plugin, config);
 ```

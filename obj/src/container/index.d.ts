@@ -1,2 +1,2 @@
-export { PerfMonProcess } from './PerfMonProcess';
-export { PerfMonLambdaFunction } from './PerfMonLambdaFunction';
+export { CountersProcess } from './CountersProcess';
+export { CountersLambdaFunction } from './CountersLambdaFunction';

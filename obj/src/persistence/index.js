@@ -1,9 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var PerfMonMemoryPersistence_1 = require("./PerfMonMemoryPersistence");
-exports.PerfMonMemoryPersistence = PerfMonMemoryPersistence_1.PerfMonMemoryPersistence;
-var PerfMonMongoDbPersistence_1 = require("./PerfMonMongoDbPersistence");
-exports.PerfMonMongoDbPersistence = PerfMonMongoDbPersistence_1.PerfMonMongoDbPersistence;
-var PerfMonMongooseSchema_1 = require("./PerfMonMongooseSchema");
-exports.PerfMonMongooseSchema = PerfMonMongooseSchema_1.PerfMonMongooseSchema;
+var CountersMemoryPersistence_1 = require("./CountersMemoryPersistence");
+exports.CountersMemoryPersistence = CountersMemoryPersistence_1.CountersMemoryPersistence;
+var CountersMongoDbPersistence_1 = require("./CountersMongoDbPersistence");
+exports.CountersMongoDbPersistence = CountersMongoDbPersistence_1.CountersMongoDbPersistence;
 //# sourceMappingURL=index.js.map

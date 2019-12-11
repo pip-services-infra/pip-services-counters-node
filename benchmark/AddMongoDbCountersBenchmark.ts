@@ -9,8 +9,8 @@ import { References } from 'pip-services3-commons-node';
 
 import { ErrorDescription } from 'pip-services3-commons-node';
 import { CounterV1 } from '../src/data/version1/CounterV1';
-import { PerfMonMongoDbPersistence } from '../src/persistence/PerfMonMongoDbPersistence';
-import { PerfMonController } from '../src/logic/PerfMonController';
+import { CountersMongoDbPersistence } from '../src/persistence/CountersMongoDbPersistence';
+import { CountersController } from '../src/logic/CountersController';
 
 export class AddMongoDbCountersBenchmark extends Benchmark {
     private _initialRecordNumber: number;
@@ -21,8 +21,8 @@ export class AddMongoDbCountersBenchmark extends Benchmark {
     private _source: string;
     private _time: Date;
 
-    private _persistence: PerfMonMongoDbPersistence;
-    private _controller: PerfMonController;
+    private _persistence: CountersMongoDbPersistence;
+    private _controller: CountersController;
 
     public constructor() {
         super("AddMongoDbCounters", "Measures performance of adding Counters into MongoDB database");
@@ -42,7 +42,7 @@ export class AddMongoDbCountersBenchmark extends Benchmark {
         let mongoPort = this.context.parameters.MongoPort.getAsInteger();
         let mongoDb = this.context.parameters.MongoDb.getAsString();
 
-        this._persistence = new PerfMonMongoDbPersistence();
+        this._persistence = new CountersMongoDbPersistence();
         this._persistence.configure(ConfigParams.fromTuples(
             'connection.uri', mongoUri,
             'connection.host', mongoHost,
@@ -50,11 +50,11 @@ export class AddMongoDbCountersBenchmark extends Benchmark {
             'connection.database', mongoDb
         ));
 
-        this._controller = new PerfMonController();
+        this._controller = new CountersController();
 
         let references: References = References.fromTuples(
-            new Descriptor('pip-services-perfmon', 'persistence', 'mongodb', 'default', '1.0'), this._persistence,
-            new Descriptor('pip-services-perfmon', 'controller', 'default', 'default', '1.0'), this._controller
+            new Descriptor('pip-services-counters', 'persistence', 'mongodb', 'default', '1.0'), this._persistence,
+            new Descriptor('pip-services-counters', 'controller', 'default', 'default', '1.0'), this._controller
         );
         this._controller.setReferences(references);
 

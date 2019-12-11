@@ -1,5 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var PerfMonController_1 = require("./PerfMonController");
-exports.PerfMonController = PerfMonController_1.PerfMonController;
+var CountersController_1 = require("./CountersController");
+exports.CountersController = CountersController_1.CountersController;
 //# sourceMappingURL=index.js.map

@@ -1,1 +1,1 @@
-export { PerfMonServiceFactory } from './PerfMonServiceFactory';
+export { CountersServiceFactory } from './CountersServiceFactory';

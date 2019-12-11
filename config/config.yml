@@ -1,7 +1,7 @@
 ---
 # Container descriptor
 - descriptor: "pip-services:context-info:default:default:1.0"
-  name: "pip-services-perfmon"
+  name: "pip-services-counters"
   description: "Counters microservice for pip-services"
 
 # Console logger
@@ -14,18 +14,18 @@
 
 {{#if MEMORY_ENABLED}}
 # In-memory persistence. Use only for testing!
-- descriptor: "pip-services-perfmon:persistence:memory:default:1.0"
+- descriptor: "pip-services-counters:persistence:memory:default:1.0"
 {{/if}}
 
 {{#if FILE_ENABLED}}
 # File persistence. Use it for testing of for simple standalone deployments
-- descriptor: "pip-services-perfmon:persistence:file:default:1.0"
+- descriptor: "pip-services-counters:persistence:file:default:1.0"
   path: {{FILE_PATH}}{{#unless FILE_PATH}}"../data/counters.json"{{/unless}}
 {{/if}}
 
 {{#if MONGO_ENABLED}}
 # MongoDB Persistence
-- descriptor: "pip-services-perfmon:persistence:mongodb:default:1.0"
+- descriptor: "pip-services-counters:persistence:mongodb:default:1.0"
   collection: {{MONGO_COLLECTION}}{{#unless MONGO_COLLECTION}}counters{{/unless}}
   connection:
     uri: {{{MONGO_SERVICE_URI}}}
@@ -39,11 +39,11 @@
 
 {{#unless MEMORY_ENABLED}}{{#unless FILE_ENABLED}}{{#unless MONGO_ENABLED}}
 # Default in-memory persistence
-- descriptor: "pip-services-perfmon:persistence:memory:default:1.0"
+- descriptor: "pip-services-counters:persistence:memory:default:1.0"
 {{/unless}}{{/unless}}{{/unless}}
 
 # Default controller
-- descriptor: "pip-services-perfmon:controller:default:default:1.0"
+- descriptor: "pip-services-counters:controller:default:default:1.0"
   options:
     expire_cleanup_timeout: 60
     expire_counter_timeout: 3
@@ -56,7 +56,7 @@
     port: 8080
 
 # HTTP endpoint version 1.0
-- descriptor: "pip-services-perfmon:service:http:default:1.0"
+- descriptor: "pip-services-counters:service:http:default:1.0"
 
 # Heartbeat service
 - descriptor: "pip-services:heartbeat-service:http:default:1.0"
