@@ -7,22 +7,22 @@ const pip_benchmark_node_1 = require("pip-benchmark-node");
 const pip_benchmark_node_2 = require("pip-benchmark-node");
 const pip_benchmark_node_3 = require("pip-benchmark-node");
 const pip_benchmark_node_4 = require("pip-benchmark-node");
-const CountersBenchmarkSuite_1 = require("./CountersBenchmarkSuite");
+const PerfMonBenchmarkSuite_1 = require("./PerfMonBenchmarkSuite");
 let runner = new pip_benchmark_node_1.BenchmarkRunner();
 pip_benchmark_node_2.ConsoleEventPrinter.attach(runner);
-runner.benchmarks.addSuite(new CountersBenchmarkSuite_1.CountersBenchmarkSuite);
+runner.benchmarks.addSuite(new PerfMonBenchmarkSuite_1.PerfMonBenchmarkSuite);
 runner.parameters.set({
-    'Counters.InitialRecordNumber': 0,
-    'Counters.SourceQuantity': 10,
-    'Counters.MongoUri': process.env['MONGO_URI'],
-    'Counters.MongoHost': process.env['MONGO_HOST'] || 'localhost',
-    'Counters.MongoPort': process.env['MONGO_PORT'] || 27017,
-    'Counters.MongoDb': process.env['MONGO_DB'] || 'benchmark'
+    'PerfMon.InitialRecordNumber': 0,
+    'PerfMon.SourceQuantity': 10,
+    'PerfMon.MongoUri': process.env['MONGO_URI'],
+    'PerfMon.MongoHost': process.env['MONGO_HOST'] || 'localhost',
+    'PerfMon.MongoPort': process.env['MONGO_PORT'] || 27017,
+    'PerfMon.MongoDb': process.env['MONGO_DB'] || 'benchmark'
 });
 runner.configuration.measurementType = pip_benchmark_node_3.MeasurementType.Peak;
 runner.configuration.executionType = pip_benchmark_node_4.ExecutionType.Sequential;
 runner.configuration.duration = 10;
-runner.benchmarks.selectByName(['Counters.AddMongoDbCounters']);
+runner.benchmarks.selectByName(['PerfMon.AddMongoDbPerfMon']);
 runner.run((err) => {
     if (err)
         console.error(err);

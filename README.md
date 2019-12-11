@@ -53,14 +53,14 @@ class CounterV1 {
     public time: Date;
 }
 
-interface ICountersV1 {
-    readCounters(correlationId: string, filter: FilterParams, paging: PagingParams,
+interface IPerfMonV1 {
+    readPerfMon(correlationId: string, filter: FilterParams, paging: PagingParams,
         callback: (err: any, page: DataPage<CounterV1>) => void): void;
 
     writeCounter(correlationId: string, counter: CounterV1,
         callback?: (err: any, counter: CounterV1) => void): void;
     
-    writeCounters(correlationId: string, counters: CounterV1[],
+    writePerfMon(correlationId: string, counters: CounterV1[],
         callback?: (err: any) => void): void;
 
     clear(correlationId: string, callback?: (err: any) => void): void;
@@ -71,7 +71,7 @@ interface ICountersV1 {
 
 Right now the only way to get the microservice is to check it out directly from github repository
 ```bash
-git clone git@github.com:pip-services-infrastructure/pip-services-counters-node.git
+git clone git@github.com:pip-services-infrastructure/pip-services-perfmon-node.git
 ```
 
 Pip.Service team is working to implement packaging and make stable releases available for your 
@@ -85,17 +85,17 @@ As the starting point you can use example configuration from **config.example.ya
 Example of microservice configuration
 ```yaml
 - descriptor: "pip-services-container:container-info:default:default:1.0"
-  name: "pip-services-counters"
+  name: "pip-services-perfmon"
   description: "Performance monitor microservice"
 
 - descriptor: "pip-services-commons:logger:console:default:1.0"
   level: "trace"
 
-- descriptor: "pip-services-counters:persistence:memory:default:1.0"
+- descriptor: "pip-services-perfmon:persistence:memory:default:1.0"
 
-- descriptor: "pip-services-counters:controller:default:default:1.0"
+- descriptor: "pip-services-perfmon:controller:default:default:1.0"
 
-- descriptor: "pip-services-counters:service:http:default:1.0"
+- descriptor: "pip-services-perfmon:service:http:default:1.0"
   connection:
     protocol: "http"
     host: "0.0.0.0"
@@ -145,7 +145,7 @@ var config = {
 Instantiate the client and open connection to the microservice
 ```javascript
 // Create the client instance
-var client = sdk.CountersHttpClientV1(config);
+var client = sdk.PerfMonHttpClientV1(config);
 
 // Connect to the microservice
 client.open(null, function(err) {
@@ -180,7 +180,7 @@ client.writeCounter(
 var now = new Date();
 
 // Get the list system activities
-client.readCounters(
+client.readPerfMon(
     null,
     {
         group: "test"

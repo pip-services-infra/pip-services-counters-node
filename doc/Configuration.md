@@ -1,6 +1,6 @@
-# Configuration Guide <br/> Counters Microservice
+# Configuration Guide <br/> PerfMon Microservice
 
-Counters microservice configuration structure follows the 
+PerfMon microservice configuration structure follows the 
 [standard configuration](https://github.com/pip-services/pip-services3-container-node/doc/Configuration.md) 
 structure. 
 
@@ -27,7 +27,7 @@ Memory persistence has the following configuration properties:
 
 Example:
 ```yaml
-- descriptor: "pip-services-counters:persistence:memory:default:1.0"
+- descriptor: "pip-services-perfmon:persistence:memory:default:1.0"
   options:
     max_page_size: 100
 ```
@@ -39,7 +39,7 @@ Besides component descriptor it doesn't expect configuration options.
 
 Example:
 ```yaml
-- descriptor: "pip-services-counters:controller:default:default:1.0"
+- descriptor: "pip-services-perfmon:controller:default:default:1.0"
 ```
 
 ## <a name="service"></a> Services
@@ -60,7 +60,7 @@ A detailed description of HTTP/REST protocol version 1 can be found [here](HttpP
 
 Example:
 ```yaml
-- descriptor: "pip-services-counters:service:http:default:1.0"
+- descriptor: "pip-services-perfmon:service:http:default:1.0"
   connection:
     protocol: "http"
     host: "0.0.0.0"
@@ -79,7 +79,7 @@ A detail description of Seneca protocol version 1 can be found [here](SenecaProt
 
 Example:
 ```yaml
-- descriptor: "pip-services-counters:service:seneca:default:1.0"
+- descriptor: "pip-services-perfmon:service:seneca:default:1.0"
   connection:
     protocol: "http"
     host: "0.0.0.0"

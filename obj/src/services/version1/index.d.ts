@@ -1,1 +1,1 @@
-export { CountersHttpServiceV1 } from './CountersHttpServiceV1';
+export { PerfMonHttpServiceV1 } from './PerfMonHttpServiceV1';

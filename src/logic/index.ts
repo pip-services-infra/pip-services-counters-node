@@ -1,2 +1,2 @@
-export { ICountersController } from './ICountersController';
-export { CountersController } from './CountersController';
+export { IPerfMonController } from './IPerfMonController';
+export { PerfMonController } from './PerfMonController';

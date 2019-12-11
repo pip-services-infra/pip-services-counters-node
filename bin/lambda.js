@@ -1,3 +1,3 @@
-let CountersLambdaFunction = require('../obj/src/container/CountersLambdaFunction').CountersLambdaFunction;
+let PerfMonLambdaFunction = require('../obj/src/container/PerfMonLambdaFunction').PerfMonLambdaFunction;
 
-module.exports = new CountersLambdaFunction().getHandler();
+module.exports = new PerfMonLambdaFunction().getHandler();

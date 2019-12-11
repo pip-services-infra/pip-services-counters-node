@@ -1,6 +1,6 @@
-# Deployment Guide <br/> Counters Microservice
+# Deployment Guide <br/> PerfMon Microservice
 
-Counters microservice can be used in different deployment scenarios.
+PerfMon microservice can be used in different deployment scenarios.
 
 * [Standalone Process](#process)
 * [Seneca Plugin](#seneca)
@@ -24,7 +24,7 @@ node ./bin/run
 
 ## <a name="seneca"></a> Seneca Plugin
 
-The Counters microservice can also be used as a Seneca plugin.
+The PerfMon microservice can also be used as a Seneca plugin.
 To learn more about Seneca microservices framework to go http://senecajs.org
 
 **Step 1.** Include dependency into **package.json** file:
@@ -34,7 +34,7 @@ To learn more about Seneca microservices framework to go http://senecajs.org
     ...
     "dependencies": {
         ....
-        "pip-services-counters": "^1.0.0",
+        "pip-services-perfmon": "^1.0.0",
         ...
     }
 }
@@ -72,10 +72,10 @@ var config = {
     }
 };
 
-var plugin = require('pip-services-counters-node').CountersSenecaPlugin;
+var plugin = require('pip-services-perfmon-node').PerfMonSenecaPlugin;
 
 seneca.use(plugin, config);
 ```
 
 You can use the microservice by calling seneca commands directly as described in [Seneca Protocol](SenecaProtocolV1.md)
-or by using [CountersSenecaClient](https://github.com/pip-services-infrastructure/pip-clients-counters-node/NodeClientApiV1.md/#client_seneca)
+or by using [PerfMonSenecaClient](https://github.com/pip-services-infrastructure/pip-clients-counters-node/NodeClientApiV1.md/#client_seneca)
