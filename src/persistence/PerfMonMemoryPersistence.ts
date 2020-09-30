@@ -156,7 +156,7 @@ export class PerfMonMemoryPersistence implements IPerfMonPersistence, IConfigura
     }
 
     public deleteExpired(correlationId: string, expireTime: Date, callback: (err: any) => void): void {
-        this._counters = _.filter(this._counters, d => d.time.getTime() > expireTime.getTime());
+        this._counters = _.filter(this._counters, d => d.time ? d.time.getTime() > expireTime.getTime(): false);
 
         if (callback) callback(null);
     }

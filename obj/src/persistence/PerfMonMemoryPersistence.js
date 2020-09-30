@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.PerfMonMemoryPersistence = void 0;
 let async = require('async');
 let _ = require('lodash');
 const pip_services3_commons_node_1 = require("pip-services3-commons-node");
@@ -125,7 +126,7 @@ class PerfMonMemoryPersistence {
             callback(null);
     }
     deleteExpired(correlationId, expireTime, callback) {
-        this._counters = _.filter(this._counters, d => d.time.getTime() > expireTime.getTime());
+        this._counters = _.filter(this._counters, d => d.time ? d.time.getTime() > expireTime.getTime() : false);
         if (callback)
             callback(null);
     }
