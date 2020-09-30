@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PerfMonMongoDbPersistence = void 0;
 let async = require('async');
 const pip_services3_commons_node_1 = require("pip-services3-commons-node");
 const pip_services3_mongodb_node_1 = require("pip-services3-mongodb-node");
