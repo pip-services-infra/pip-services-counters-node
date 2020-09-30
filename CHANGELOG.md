@@ -1,3 +1,7 @@
+<a name="1.1.1"></a> ### 1.1.1 (2020-09-30)
+
+* Fix method deleteExpired in MemoryPersistence
+
 <a name="1.0.0"></a> ### 1.0.0 (2017-04-08)
 
 #### Features

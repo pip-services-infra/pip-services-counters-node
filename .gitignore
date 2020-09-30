@@ -5,3 +5,4 @@
 /data/counters.json
 /obj/test
 /docker/id_rsa*
+package-lock.json
